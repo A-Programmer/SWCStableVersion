@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>قالبت پیش فرض</title>
+        <link href="Templates/Default/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="Templates/Default/css/bootstrap-rtl.min.css" rel="stylesheet" />
+        <link href="Templates/Default/css/bootstrap-theme.min.css" rel="stylesheet" />
+        <link href="Templates/Default/css/style.css" rel="stylesheet" />
+        <link href="Templates/Default/css/style-responsive.css" rel="stylesheet" />
+        <link href="Templates/Default/css/owl.carousel.css" rel="stylesheet" />
+        <link href="Templates/Default/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="Templates/Default/css/Custom.css" rel="stylesheet" />
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    <body>
+
+        <section id="container" class="container-fluid">
+            <header class="header white-bg">
+                <div id="DefaultHeaderZone" class="headerCol">
+                    
+                </div>
+            </header>
+            <div class="clearfix"></div>
+            <div class="container-fluid maincontent">
+                <div class="row-fluid">
+                    <div class="col-lg-3">
+                        <div id="DefaultRightZone" class="rightCol">
+                        
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="DefaultMainZone" class="mainCol"></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div id="DefaultLeftZone" class="leftCol">
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row-fluid">
+                    <section class="footer">
+                        <div id="DefaultFooterZone" class="footerCol"></div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <!-- Scripts Section -->
+
+        <script src="Templates/Default/js/jquery-1.11.3.min.js"></script>
+        <script src="Templates/Default/js/common-scripts.js"></script>
+        <script src="Templates/Default/js/bootstrap.min.js"></script>
+        <!-- End of Scripts Section -->
+        <script>
+
+            $(function () {
+                //Chon Header Ro Positionesh Relative hast Harchi Paiinesh Biyad Mire Ziresh ino Gozashtam
+                // Ke Be Andazeye Header Az Bala Fasele Begire Va Dide Beshe Bayad Be Un Div Classe Paiino Bedam
+                $('.maincontent').each(function () {
+                    var headerHeight = $('.header').height();
+                    headerHeight += 15; // maybe add an offset too?
+                    $(this).css('margin-top', headerHeight + 'px');
+                });
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                });
+            });
+        </script>
+    </body>
+</html>
+<zone id="DefaultHeaderZone" class="headerCol">منطقه بالایی</zone>
+<zone id="DefaultRightZone" class="rightCol">منطقه راست</zone>
+<zone id="DefaultMainZone" class="mainCol">منطقه وسط</zone>
+<zone id="DefaultLeftZone" class="leftCol">منطقه چپ</zone>
+<zone id="DefaultFooterZone" class="footerCol">منطقه پانوشت</zone>

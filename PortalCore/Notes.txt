@@ -1,0 +1,25 @@
+﻿
+Tou Safheye Update Ye Labele Dige Bezaram Zire Panele Entekhabe File Bad Harbar Ke Mikham Update KOnam
+Ye Notepad Be Esme UpdateNotes.txt Mizaram KE Toush Ghesmathaii Ke Update Shodan Ro Minvisam
+Bad Ye File OriginalUpdateNote.txt Ham Az Aval Tou Host Hast Ke Hameye Notehaye Update Ro Negah Midare
+Nokate Update Ro Touye Un Label Neshoun Midam Bade Harbar Ke Update Mikone Ham Matne Un Notepade
+UpdateNotes.txt Ro Be Notepade OriginalUpdateNotes.txt Asli Ezafe Mikone.
+
+
+
+
+
+Help Ya Documention Bezaram Vasash.
+
+
+Safheye 404 va 403 va 500 va UnderConstruction Doros Nashode
+
+
+----
+Karhaii Ke Baraye Nasb Bayad Anjam Beshe:
+Permission Dadan:
+Pousheye Certifications Va Filehaye Dakhelesh
+ModuleFiles
+Modules
+Templates
+UserImages

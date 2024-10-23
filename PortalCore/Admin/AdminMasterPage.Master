@@ -1,0 +1,383 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminMasterPage.master.cs" Inherits="PortalCore.Admin.AdminMasterPage" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مدیریت سایت">
+    <meta name="author" content="کامران سادین">
+    <meta name="keyword" content="سایت ساز,پورتال,وب سایت رایگان,طراحی سایت,برنامه نویسی,کامران سادین,ایران پورتال">
+    <link rel="shortcut icon" href="../Images/favicon.html">
+
+    <title><%: Page.Title %></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Admin/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/Admin/css/style.css" rel="stylesheet">
+    <link href="/Admin/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/Admin/js/html5shiv.js"></script>
+      <script src="/Admin/js/respond.min.js"></script>
+    <![endif]-->
+    <asp:ContentPlaceHolder ID="CpHeader" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server" ID="scAdmin"></asp:ScriptManager>
+        <section id="container" class="">
+            <!--header start-->
+            <header class="header white-bg">
+                <div class="sidebar-toggle-box">
+                    <div data-original-title="منوی راهبری" data-placement="left" class="icon-reorder fa fa-reorder tooltips"></div>
+                </div>
+                <!--logo start-->
+                <a href="#" class="logo">پنل <span>مدیریت</span></a>
+                <!--logo end-->
+                <div class="nav notify-row" id="top_menu">
+
+                    <ul class="nav top-menu">
+                        <!-- notification dropdown start-->
+                        <li id="header_notification_bar" class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                                <i class="fa fa-bell-o"></i>
+                                <span class="badge bg-warning">
+                                    <asp:Literal runat="server" ID="ltNotificationCount"></asp:Literal>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu extended notification">
+                                <div class="notify-arrow notify-arrow-yellow"></div>
+                                <li>
+                                    <p class="yellow">شما
+                                        <asp:Literal runat="server" ID="ltNotifiesCount"></asp:Literal>
+                                        اعلان جدید دارید</p>
+                                </li>
+                                <asp:Repeater runat="server" ID="rptNotifications"
+                                    ItemType="PortalCore.Models.Notification">
+                                    <ItemTemplate>
+                                        <li>
+                                            <a href="javascript:;" data-toggle="modal"
+                                                data-target="#Notification-<%#Eval("Id") %>">
+                                                <%#Eval("Title") %>
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <li>
+                                    <a href="/Admin/ManageNotifications">نمایش تمامی اعلام ها</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- notification dropdown end -->
+                    </ul>
+                    <!--  notification end -->
+                </div>
+                <div class="top-nav ">
+                    <!--user info start-->
+                    <ul class="nav pull-right top-menu">
+                        <!-- user login dropdown start-->
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <img runat="server" id="imgProfile" alt="" />
+                                &nbsp;&nbsp;
+                                <span class="username">
+                                    <asp:Literal runat="server" ID="ltUserName"></asp:Literal>
+                                </span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu extended logout">
+                                <div class="log-arrow-up"></div>
+                                <li runat="server" id="liUserProfile">
+                                    <a href="/Admin/Profile"><i class=" fa fa-user"></i>پروفایل</a>
+                                </li>
+                                <li runat="server" id="liTopSettings">
+                                    <a href="/Admin/Settings"><i class=" fa fa-cog"></i>تنظیمات</a>
+                                </li>
+                                <li runat="server" id="liChangePassword">
+                                    <a href="javascript:;" data-toggle="modal"
+                                    data-target="#ChangePassword"><i class="fa fa-user-secret"></i>تغییر رمز</a>
+                                </li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="lbSignOut" OnClick="lbSignOut_OnClick">
+                                        <i class="fa fa-power-off"></i>خروج
+                                    </asp:LinkButton>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- user login dropdown end -->
+                    </ul>
+                    <!--search & user info end-->
+                </div>
+            </header>
+            <!--header end-->
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar" class="nav-collapse ">
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu">
+                        <li class="active">
+                            <a class="" href="/">
+                                <i class="fa fa-home"></i>
+                                <span>نمایش وب سایت</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Admin/">
+                                <i class="fa fa-dashboard"></i>
+                                <span>میز کار</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu">
+                            <a class="" href="javascript:;">
+                                <i class="fa fa-user"></i>
+                                <span>کاربران</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub">
+                                <li runat="server" id="liManageUsers">
+                                    <a class="" href="/Admin/ManageUsers">
+                                        <i class="fa fa-user"></i>
+                                        <span>کاربران</span>
+                                    </a>
+                                </li>
+                                <li runat="server" id="liManageRoles">
+                                    <a class="" href="/Admin/ManageRoles">
+                                        <i class="fa fa-group"></i>
+                                        <span>گروه ها</span>
+                                    </a>
+                                </li>
+                                <li runat="server" id="liPermissions">
+                                    <a class="" href="/Admin/ManagePermissions">
+                                        <i class="fa fa-unlock-alt"></i>
+                                        <span>دسترسی ها</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a class="" href="javascript:;">
+                                <i class="fa fa-wrench"></i>
+                                <span>تنظیمات</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub">
+                                <li runat="server" id="liGeneralSettings">
+                                    <a class="" href="/Admin/Settings">
+                                        <i class="fa fa-gears"></i>
+                                        <span>تنظیمات کلی</span>
+                                    </a>
+                                </li>
+                                <li runat="server" id="liEmailSettings">
+                                    <a class="" href="/Admin/EmailSettings">
+                                        <i class="fa fa-envelope"></i>
+                                        <span>تنظیمات ایمیل</span>
+                                    </a>
+                                </li>
+                                <li runat="server" id="liManageModules">
+                                    <a class="" href="/Admin/ManageModules">
+                                        <i class="fa fa-cubes"></i>
+                                        <span>مدیریت امکانات</span>
+                                    </a>
+                                </li>
+                                <li runat="server" id="liManagePages">
+                                    <a class="" href="/Admin/ManagePages">
+                                        <i class="fa fa-folder-open"></i>
+                                        <span>صفحات</span>
+                                    </a>
+                                </li>
+                                <li runat="server" id="liManageTemplates">
+                                    <a class="" href="/Admin/ManageTemplates">
+                                        <i class="fa fa-photo"></i>
+                                        <span>قالب ها</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a class="" href="javascript:;">
+                                <i class="fa fa-cubes"></i>
+                                <span>امکانات</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub">
+                                <asp:Repeater runat="server" ID="rptInstalledModule" ItemType="PortalCore.Models.Module">
+                                    <ItemTemplate>
+                                        <li runat="server" 
+                                            Visible='<%# CheckModulePermission(Eval("Name").ToString()) %>'>
+                                            <a class="" href='<%#Eval("Name","/Admin/ManageModules/{0}") %>'>
+                                                <i class="fa fa-cube"></i>
+                                                <span><%# Eval("Title") %></span>
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <li runat="server" id="liEmptyModule"
+                                            Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>'>
+                                            <a href="#">
+                                                امکانی موجود نیست
+                                            </a>
+                                        </li>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </li>
+                        <li runat="server" id="liCoreUpdate">
+                            <a class="" href="/Admin/CoreUpdate">
+                                <i class="fa fa-refresh"></i>
+                                <span>به روز رسانی</span>
+                            </a>
+                        </li>
+                        <li runat="server" id="liManageLicense">
+                            <a class="" href="/Admin/ManageLicense">
+                                <i class="fa fa-key"></i>
+                                <span>مجوز ها</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- sidebar menu end-->
+                </div>
+            </aside>
+            <!--sidebar end-->
+            <!--main content start-->
+            <section id="main-content">
+                <section class="wrapper">
+                    <!-- page start-->
+                    <asp:ContentPlaceHolder ID="CpMain" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <!-- page end-->
+                </section>
+            </section>
+            <!--main content end-->
+        </section>
+        <!-- js placed at the end of the document so the pages load faster -->
+        <script src="/Admin/js/jquery.js"></script>
+        <script src="/Admin/js/bootstrap.min.js"></script>
+        <script src="/Admin/js/jquery.scrollTo.min.js"></script>
+        <script src="/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+        <!--common script for all pages-->
+        <script src="/Admin/js/common-scripts.js"></script>
+        <asp:Repeater runat="server" ID="rptContent" ItemType="PortalCore.Models.Notification">
+            <ItemTemplate>
+                <div id="Notification-<%#Eval("Id") %>" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="panel">
+                                        <header class="panel-heading">
+                                            <%#Eval("Title") %>
+                                        </header>
+                                        <div class="panel-body">
+                                            <%#Eval("Message") %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="pull-right">
+                                    <%# Persia.Calendar.ConvertToPersian(Convert.ToDateTime(Eval("SentDate"))).ToRelativeDateString("p,4,60,22") %>
+                                </div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">برگشت</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+        <div id="ChangePassword" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <asp:UpdatePanel runat="server" ID="upChangePassword">
+                                <ContentTemplate>
+                                    <div class="panel">
+                                        <header class="panel-heading">
+                                            تغییر رمز &nbsp;&nbsp;&nbsp;
+                                            <asp:Literal runat="server" ID="ltChangePasswordMessage"></asp:Literal>
+                                        </header>
+                                        <div class="panel-body">
+                                            <div class="form-horizontal tasi-form">
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4">
+                                                        رمز فعلی
+                                                    <asp:RequiredFieldValidator runat="server" ID="rfvCurrentPassword"
+                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtCurrentPassword"
+                                                        ValidationGroup="ChangePassword">*</asp:RequiredFieldValidator>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        <asp:TextBox runat="server" ID="txtCurrentPassword" placeholder="رمز فعلی را وارد کنید" CssClass="cp1 form-control"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4">
+                                                        رمز جدید
+                                                    <asp:RequiredFieldValidator runat="server" ID="rfvNewPassword"
+                                                        ErrorMessage="*" ForeColor="Red" ControlToValidate="txtNewPassword"
+                                                        ValidationGroup="ChangePassword">*</asp:RequiredFieldValidator>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        <asp:TextBox runat="server" ID="txtNewPassword" placeholder="رمز جدید را وارد کنید" CssClass="cp1 form-control"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4">
+                                                        تکرار رمز جدید
+                                                    <asp:CompareValidator runat="server" ID="cpmRepeatPassword"
+                                                        ControlToCompare="txtNewPassword" ControlToValidate="txtRepeatPassword"
+                                                        ValidationGroup="ChangePassword" ErrorMessage="*" ForeColor="Red">*</asp:CompareValidator>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        <asp:TextBox runat="server" ID="txtRepeatPassword" placeholder="تکرار رمز جدید را وارد کنید" CssClass="cp1 form-control"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-sm-4">
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        <asp:Button runat="server" ID="btnChangePassword" ValidationGroup="ChangePassword"
+                                                            Text="تغییر کلمه عبور" CssClass="btn btn-block btn-shadow btn-success"
+                                                            OnClick="btnChangePassword_OnClick" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <asp:UpdateProgress runat="server" ID="uProgress">
+                                        <ProgressTemplate>
+                                            <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 0.7;">
+                                                <i class="fa fa-cog fa-spin fa-4x" style="padding: 10px;position:fixed;top:35%;left:50%;"></i>
+                                            </div>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-right">
+                            <%# Persia.Calendar.ConvertToPersian(Convert.ToDateTime(Eval("SentDate"))).ToRelativeDateString("p,4,60,22") %>
+                        </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">برگشت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <asp:ContentPlaceHolder runat="server" ID="cpJsFiles"></asp:ContentPlaceHolder>
+    </form>
+
+</body>
+</html>
